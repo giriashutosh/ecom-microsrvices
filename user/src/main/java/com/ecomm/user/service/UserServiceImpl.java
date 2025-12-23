@@ -34,19 +34,20 @@ public class UserServiceImpl implements UserService{
        // user.setId(++id);
         User user = new User();
         user = mapUserRequestToUser(user, userRequest);
-        userRepositiry.save(user);
+        User savedUser = userRepositiry.save(user);
+        logger.info("🔥 USER SAVED WITH ID = {}", savedUser.getId());
     }
 
     @Override
     public UserResponse getUserById(Long id) {
-        return userRepositiry.findById(id)
+        return userRepositiry.findById(String.valueOf(id))
                 .map(this::mapUserToUserResponse)
                 .orElse(null);
     }
 
     @Override
     public UserResponse updateUserById(Long id, UserRequest updatedUserRequest) {
-        return userRepositiry.findById(id).map(
+        return userRepositiry.findById(String.valueOf(id)).map(
                 user -> {
                     User updatedUser = mapUserRequestToUser(user, updatedUserRequest);
                     userRepositiry.save(updatedUser);
@@ -57,7 +58,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void deleteUserById(Long id) {
-           userRepositiry.deleteById(id);
+           userRepositiry.deleteById(String.valueOf(id));
     }
 
     public User mapUserRequestToUser(User user, UserRequest userRequest){
@@ -81,7 +82,7 @@ public class UserServiceImpl implements UserService{
 
     public UserResponse mapUserToUserResponse(User user){
         UserResponse response = new UserResponse();
-        response.setId(user.getId());
+        response.setId(Long.valueOf(user.getId()));
         response.setName(user.getName());
         response.setEmail(user.getEmail());
         response.setPhone_no(user.getPhone_no());
