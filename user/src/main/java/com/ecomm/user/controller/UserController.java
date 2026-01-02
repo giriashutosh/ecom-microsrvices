@@ -33,7 +33,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponse> getUserById(@PathVariable Long id){
+    public ResponseEntity<UserResponse> getUserById(@PathVariable String id){
         UserResponse user = userService.getUserById(id);
         if (user == null) {
             return ResponseEntity.notFound().build(); // 404
@@ -42,7 +42,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponse> updateUserById(@PathVariable Long id, @RequestBody UserRequest updatedUserRequest){
+    public ResponseEntity<UserResponse> updateUserById(@PathVariable String id, @RequestBody UserRequest updatedUserRequest){
         UserResponse user = userService.updateUserById(id, updatedUserRequest);
         if (user == null) {
             return ResponseEntity.notFound().build(); // 404 if user doesn't exist
@@ -51,7 +51,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUserById(@PathVariable Long id){
+    public ResponseEntity<String> deleteUserById(@PathVariable String id){
         userService.deleteUserById(id);
         return ResponseEntity.ok("User has been deleted successfully!");
     }

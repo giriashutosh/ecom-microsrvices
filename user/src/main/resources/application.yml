@@ -3,13 +3,15 @@ spring:
     name: user-service
   data:
     mongodb:
-      uri: mongodb://localhost:27017/userdb
-#      database: userdb
+#      uri: mongodb+srv://ashutoshgiri249_db_user:<BPfOeKvZDpwwbzh4>@user-data.4lifmah.mongodb.net/?appName=user-data
+       uri: mongodb://localhost:27017/userdb
+       database: userdb
 
-logging:
-  level:
-    org.springframework.data.mongodb.core.MongoTemplate: DEBUG
-    org.mongodb.driver: DEBUG
+#logging:
+#  level:
+#    org.
+springframework.data.mongodb.core.MongoTemplate: DEBUG
+#    org.mongodb.driver: DEBUG
 #  h2:
 #    console:
 #      enabled: true

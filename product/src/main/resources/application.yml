@@ -1,15 +1,24 @@
 spring:
   application:
     name: product-service
-  h2:
-    console:
-      enabled: true
+#  h2:
+#    console:
+#      enabled: true
   datasource:
-    url: jdbc:h2:mem:test
+     url: jdbc:postgresql://localhost:5432/products
+     username: postgres
+     password: 'mysql@98'
+#    url: jdbc:h2:mem:test
+#     url: jdbc:postgresql://ep-curly-lab-a4k6cy76-pooler.us-east-1.aws.neon.tech/product?sslmode=require&channel_binding=require
+#     username: neondb_owner
+#     password: 'npg_DWjTq35QEcdM'
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update # Changed to 'update' so you don't lose data on every restart
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
 server:
   port: 8081

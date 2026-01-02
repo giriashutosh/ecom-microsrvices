@@ -39,14 +39,14 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserResponse getUserById(Long id) {
+    public UserResponse getUserById(String id) {
         return userRepositiry.findById(String.valueOf(id))
                 .map(this::mapUserToUserResponse)
                 .orElse(null);
     }
 
     @Override
-    public UserResponse updateUserById(Long id, UserRequest updatedUserRequest) {
+    public UserResponse updateUserById(String id, UserRequest updatedUserRequest) {
         return userRepositiry.findById(String.valueOf(id)).map(
                 user -> {
                     User updatedUser = mapUserRequestToUser(user, updatedUserRequest);
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void deleteUserById(Long id) {
+    public void deleteUserById(String id) {
            userRepositiry.deleteById(String.valueOf(id));
     }
 
@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService{
 
     public UserResponse mapUserToUserResponse(User user){
         UserResponse response = new UserResponse();
-        response.setId(Long.valueOf(user.getId()));
+        response.setId(user.getId());
         response.setName(user.getName());
         response.setEmail(user.getEmail());
         response.setPhone_no(user.getPhone_no());
